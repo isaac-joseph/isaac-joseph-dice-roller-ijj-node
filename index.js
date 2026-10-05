@@ -34,6 +34,26 @@ app.get('/api/ping', (request, response) => {
 	response.send('ping response')
 })
 
+// Generate one random die value.
+function rollDie(sides) {
+	return Math.floor(Math.random() * sides) + 1
+}
+
+// Return five random dice values as JSON.
+app.get('/api/roll-dice', (request, response) => {
+	console.log('Calling "/api/roll-dice" on the Node.js server.')
+
+	const dice = []
+
+	for (let i = 0; i < 5; i++) {
+		dice.push(rollDie(6))
+	}
+
+	response.json({
+		dice: dice
+	})
+})
+
 // Return the value of 2 plus 2.
 app.get('/2plus2', (request, response) => {
 	console.log('Calling "/2plus2" on the Node.js server.')
